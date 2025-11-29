@@ -32,11 +32,13 @@ export async function predictWithSaad(message, history = [], twinName = 'saad') 
     });
 
     if (!response.ok) {
+      // Read response text first (can only read once)
+      const text = await response.text();
       let errorData;
       try {
-        errorData = await response.json();
+        errorData = JSON.parse(text);
       } catch (e) {
-        const text = await response.text();
+        // Not JSON, use raw text
         throw new Error(`HTTP ${response.status}: ${text || 'Unknown error'}`);
       }
       throw new Error(errorData.error || errorData.message || `HTTP error! status: ${response.status}`);
@@ -75,11 +77,13 @@ export async function chatWithSaad(message, history = [], twinName = 'saad') {
     });
 
     if (!response.ok) {
+      // Read response text first (can only read once)
+      const text = await response.text();
       let errorData;
       try {
-        errorData = await response.json();
+        errorData = JSON.parse(text);
       } catch (e) {
-        const text = await response.text();
+        // Not JSON, use raw text
         throw new Error(`HTTP ${response.status}: ${text || 'Unknown error'}`);
       }
       throw new Error(errorData.error || errorData.message || `HTTP error! status: ${response.status}`);
@@ -126,11 +130,13 @@ export async function predictWithAmmar(message, history = [], twinName = 'ammar'
     });
 
     if (!response.ok) {
+      // Read response text first (can only read once)
+      const text = await response.text();
       let errorData;
       try {
-        errorData = await response.json();
+        errorData = JSON.parse(text);
       } catch (e) {
-        const text = await response.text();
+        // Not JSON, use raw text
         throw new Error(`HTTP ${response.status}: ${text || 'Unknown error'}`);
       }
       throw new Error(errorData.error || errorData.message || `HTTP error! status: ${response.status}`);
@@ -173,11 +179,13 @@ export async function chatWithAmmar(message, history = [], twinName = 'ammar') {
     });
 
     if (!response.ok) {
+      // Read response text first (can only read once)
+      const text = await response.text();
       let errorData;
       try {
-        errorData = await response.json();
+        errorData = JSON.parse(text);
       } catch (e) {
-        const text = await response.text();
+        // Not JSON, use raw text
         throw new Error(`HTTP ${response.status}: ${text || 'Unknown error'}`);
       }
       throw new Error(errorData.error || errorData.message || `HTTP error! status: ${response.status}`);
