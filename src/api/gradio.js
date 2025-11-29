@@ -34,6 +34,7 @@ export async function predictWithSaad(message, history = [], twinName = 'saad') 
     if (!response.ok) {
       // Read response text first (can only read once)
       const text = await response.text();
+      console.error(`❌ API Error (${response.status}):`, text);
       let errorData;
       try {
         errorData = JSON.parse(text);
@@ -41,7 +42,9 @@ export async function predictWithSaad(message, history = [], twinName = 'saad') 
         // Not JSON, use raw text
         throw new Error(`HTTP ${response.status}: ${text || 'Unknown error'}`);
       }
-      throw new Error(errorData.error || errorData.message || `HTTP error! status: ${response.status}`);
+      const errorMessage = errorData.error || errorData.message || `HTTP error! status: ${response.status}`;
+      console.error('   Parsed error:', errorMessage);
+      throw new Error(errorMessage);
     }
 
     const data = await response.json();
@@ -79,6 +82,7 @@ export async function chatWithSaad(message, history = [], twinName = 'saad') {
     if (!response.ok) {
       // Read response text first (can only read once)
       const text = await response.text();
+      console.error(`❌ API Error (${response.status}):`, text);
       let errorData;
       try {
         errorData = JSON.parse(text);
@@ -86,7 +90,9 @@ export async function chatWithSaad(message, history = [], twinName = 'saad') {
         // Not JSON, use raw text
         throw new Error(`HTTP ${response.status}: ${text || 'Unknown error'}`);
       }
-      throw new Error(errorData.error || errorData.message || `HTTP error! status: ${response.status}`);
+      const errorMessage = errorData.error || errorData.message || `HTTP error! status: ${response.status}`;
+      console.error('   Parsed error:', errorMessage);
+      throw new Error(errorMessage);
     }
 
     const data = await response.json();
@@ -132,6 +138,7 @@ export async function predictWithAmmar(message, history = [], twinName = 'ammar'
     if (!response.ok) {
       // Read response text first (can only read once)
       const text = await response.text();
+      console.error(`❌ API Error (${response.status}):`, text);
       let errorData;
       try {
         errorData = JSON.parse(text);
@@ -139,7 +146,9 @@ export async function predictWithAmmar(message, history = [], twinName = 'ammar'
         // Not JSON, use raw text
         throw new Error(`HTTP ${response.status}: ${text || 'Unknown error'}`);
       }
-      throw new Error(errorData.error || errorData.message || `HTTP error! status: ${response.status}`);
+      const errorMessage = errorData.error || errorData.message || `HTTP error! status: ${response.status}`;
+      console.error('   Parsed error:', errorMessage);
+      throw new Error(errorMessage);
     }
 
     const data = await response.json();
@@ -181,6 +190,7 @@ export async function chatWithAmmar(message, history = [], twinName = 'ammar') {
     if (!response.ok) {
       // Read response text first (can only read once)
       const text = await response.text();
+      console.error(`❌ API Error (${response.status}):`, text);
       let errorData;
       try {
         errorData = JSON.parse(text);
@@ -188,7 +198,9 @@ export async function chatWithAmmar(message, history = [], twinName = 'ammar') {
         // Not JSON, use raw text
         throw new Error(`HTTP ${response.status}: ${text || 'Unknown error'}`);
       }
-      throw new Error(errorData.error || errorData.message || `HTTP error! status: ${response.status}`);
+      const errorMessage = errorData.error || errorData.message || `HTTP error! status: ${response.status}`;
+      console.error('   Parsed error:', errorMessage);
+      throw new Error(errorMessage);
     }
 
     const data = await response.json();

@@ -174,21 +174,30 @@ app.post('/api/chat', async (req, res) => {
     }
     
     console.log('   🔗 Connecting to Gradio Space:', spaceName);
-    const client = await getGradioClient(spaceName);
-    
-    // ✅ Pass history to Gradio
-    const result = await callGradioEndpoint(client, message, history);
-    const response = extractResponse(result);
-    
-    console.log('📤 Sending response:', response);
-    
-    res.json({ response });
+    try {
+      const client = await getGradioClient(spaceName);
+      
+      // ✅ Pass history to Gradio
+      const result = await callGradioEndpoint(client, message, history);
+      const response = extractResponse(result);
+      
+      console.log('📤 Sending response:', response);
+      
+      res.json({ response });
+    } catch (gradioError) {
+      console.error('   ❌ Gradio Error:', gradioError.message);
+      console.error('   ❌ Gradio Error Stack:', gradioError.stack);
+      throw gradioError;
+    }
     
   } catch (error) {
-    console.error('Error in /api/chat:', error);
+    console.error('❌ Error in /api/chat:', error);
+    console.error('   Error message:', error.message);
+    console.error('   Error stack:', error.stack);
     res.status(500).json({ 
       error: 'Failed to get response from AI', 
-      message: error.message 
+      message: error.message,
+      details: error.stack
     });
   }
 });
@@ -223,19 +232,29 @@ app.post('/api/predict', async (req, res) => {
     }
     
     console.log('   🔗 Connecting to Gradio Space:', spaceName);
-    const client = await getGradioClient(spaceName);
-    
-    // Pass history to Gradio
-    const result = await callGradioEndpoint(client, message, history);
-    const response = extractResponse(result);
-    
-    res.json({ response });
+    try {
+      const client = await getGradioClient(spaceName);
+      
+      // Pass history to Gradio
+      const result = await callGradioEndpoint(client, message, history);
+      const response = extractResponse(result);
+      
+      console.log('   ✅ Successfully got response from Gradio');
+      res.json({ response });
+    } catch (gradioError) {
+      console.error('   ❌ Gradio Error:', gradioError.message);
+      console.error('   ❌ Gradio Error Stack:', gradioError.stack);
+      throw gradioError;
+    }
     
   } catch (error) {
-    console.error('Error in /api/predict:', error);
+    console.error('❌ Error in /api/predict:', error);
+    console.error('   Error message:', error.message);
+    console.error('   Error stack:', error.stack);
     res.status(500).json({ 
       error: 'Failed to get response from AI', 
-      message: error.message 
+      message: error.message,
+      details: error.stack
     });
   }
 });
