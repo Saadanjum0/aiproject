@@ -1,0 +1,36 @@
+{
+  "name": "aiproject100",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Prism WebGL component implementation",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "server": "node server.js",
+    "dev:all": "concurrently \"npm run server\" \"npm run dev\""
+  },
+  "keywords": [
+    "prism",
+    "webgl",
+    "react",
+    "ogl"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@gradio/client": "^2.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "ogl": "^0.0.93",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^7.9.6"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "concurrently": "^9.2.1",
+    "vite": "^5.0.8"
+  }
+}

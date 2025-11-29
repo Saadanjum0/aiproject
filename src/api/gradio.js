@@ -1,0 +1,94 @@
+/**
+ * API utility for calling the Express proxy server
+ * The proxy server handles the Gradio API connection
+ */
+
+// Use relative URL in development (Vite proxy handles it)
+// Use full URL in production or if VITE_API_URL is set
+const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
+
+/**
+ * Call the /predict endpoint via proxy
+ * @param {string} message - The message to send
+ * @param {Array} history - The conversation history in Gradio format [[user, bot], ...]
+ * @param {string} twinName - The twin name ('saad' or 'ammar'), defaults to 'saad'
+ * @returns {Promise<string>} - The response text
+ */
+export async function predictWithSaad(message, history = [], twinName = 'saad') {
+  try {
+    const url = API_BASE_URL.startsWith('http') 
+      ? `${API_BASE_URL}/api/predict` 
+      : `${API_BASE_URL}/predict`;
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ 
+        message,
+        history,  // ✅ Send history to server
+        twinName   // ✅ Send twin name to server
+      }),
+    });
+
+    if (!response.ok) {
+      let errorData;
+      try {
+        errorData = await response.json();
+      } catch (e) {
+        const text = await response.text();
+        throw new Error(`HTTP ${response.status}: ${text || 'Unknown error'}`);
+      }
+      throw new Error(errorData.error || errorData.message || `HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.response || data.message || 'No response received';
+  } catch (error) {
+    console.error('Error calling API:', error);
+    throw error;
+  }
+}
+
+/**
+ * Call the /chat endpoint via proxy
+ * @param {string} message - The message to send
+ * @param {Array} history - The conversation history in Gradio format [[user, bot], ...]
+ * @param {string} twinName - The twin name ('saad' or 'ammar'), defaults to 'saad'
+ * @returns {Promise<string>} - The response text
+ */
+export async function chatWithSaad(message, history = [], twinName = 'saad') {
+  try {
+    const url = API_BASE_URL.startsWith('http') 
+      ? `${API_BASE_URL}/api/chat` 
+      : `${API_BASE_URL}/chat`;
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ 
+        message,
+        history,  // ✅ Send history to server
+        twinName   // ✅ Send twin name to server
+      }),
+    });
+
+    if (!response.ok) {
+      let errorData;
+      try {
+        errorData = await response.json();
+      } catch (e) {
+        const text = await response.text();
+        throw new Error(`HTTP ${response.status}: ${text || 'Unknown error'}`);
+      }
+      throw new Error(errorData.error || errorData.message || `HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.response || data.message || 'No response received';
+  } catch (error) {
+    console.error('Error calling API:', error);
+    throw error;
+  }
+}
