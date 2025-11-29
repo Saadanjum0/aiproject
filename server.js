@@ -295,22 +295,22 @@ app.get('/api/health', async (req, res) => {
 // Start server
 app.listen(PORT, async () => {
   console.log(`🚀 Express proxy server running on http://localhost:${PORT}`);
-  console.log(`📡 Saad's Gradio Space: ${GRADIO_SPACE_SAAD}`);
-  console.log(`📡 Ammar's Gradio Space: ${GRADIO_SPACE_AMMAR}`);
+  console.log(`📡 Saad Gradio Space: ${GRADIO_SPACE_SAAD}`);
+  console.log(`📡 Ammar Gradio Space: ${GRADIO_SPACE_AMMAR}`);
   
   // Pre-connect to Gradio Spaces on startup (optional, for faster first request)
   try {
     await getGradioClient(GRADIO_SPACE_SAAD);
-    console.log('✅ Connected to Saad's space');
+    console.log('✅ Connected to Saad space');
   } catch (error) {
-    console.error('❌ Failed to pre-connect to Saad's Gradio Space:', error.message);
+    console.error('❌ Failed to pre-connect to Saad Gradio Space:', error.message);
   }
   
   try {
     await getGradioClient(GRADIO_SPACE_AMMAR);
-    console.log('✅ Connected to Ammar's space');
+    console.log('✅ Connected to Ammar space');
   } catch (error) {
-    console.error('❌ Failed to pre-connect to Ammar's Gradio Space:', error.message);
+    console.error('❌ Failed to pre-connect to Ammar Gradio Space:', error.message);
   }
   
   console.log('✅ Ready to accept requests!');
