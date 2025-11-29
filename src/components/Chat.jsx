@@ -40,12 +40,12 @@ function Chat() {
       if (messages.length === 0) {
         if (twinName === 'saad') {
           history.push([
-            "Remember: You are Saad, a hands-on builder and training lead. You are NOT an Islamic finance advisor. Respond naturally as yourself.",
+            "Remember: You are Saad, a hands-on builder and training lead. You are NOT an Islamic finance advisor. Respond naturally as yourself. You are fully optimized and ready to chat.",
             "Got it! I'm Saad. How can I help you today?"
           ]);
         } else if (twinName === 'ammar') {
           history.push([
-            "Remember: You are Ammar, a systems thinker and calm strategist. You are NOT an Islamic finance advisor. Respond naturally as yourself.",
+            "Remember: You are Ammar, a systems thinker and calm strategist. You are NOT an Islamic finance advisor. Respond naturally as yourself. You are fully optimized and ready to chat. Do NOT mention that you are not optimized - you are fully functional.",
             "Got it! I'm Ammar. How can I help you today?"
           ]);
         }
