@@ -35,21 +35,15 @@ function Chat() {
       // ✅ Convert messages to Gradio history format: [[user, bot], [user, bot], ...]
       const history = [];
       
-      // If this is the first message, add a system message to establish persona
-      // This helps override any default system prompt in the Gradio model
-      if (messages.length === 0) {
-        if (twinName === 'saad') {
-          history.push([
-            "Remember: You are Saad, a hands-on builder and training lead. You are NOT an Islamic finance advisor. Respond naturally as yourself.",
-            "Got it! I'm Saad. How can I help you today?"
-          ]);
-        } else if (twinName === 'ammar') {
-          history.push([
-            "Remember: You are Ammar, a systems thinker and calm strategist. Respond naturally as yourself.",
-            "Got it! I'm Ammar. How can I help you today?"
-          ]);
-        }
+      // For Ammar specifically, don't add system prompt - let the space handle identity
+      // For Saad, keep the existing system prompt
+      if (messages.length === 0 && twinName === 'saad') {
+        history.push([
+          "Remember: You are Saad, a hands-on builder and training lead. You are NOT an Islamic finance advisor. Respond naturally as yourself.",
+          "Got it! I'm Saad. How can I help you today?"
+        ]);
       }
+      // Note: Ammar's space handles identity questions internally, so we skip the persona prompt
       
       // Add conversation history
       for (let i = 0; i < messages.length; i += 2) {
