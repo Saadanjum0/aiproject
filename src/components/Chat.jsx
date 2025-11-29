@@ -76,8 +76,26 @@ function Chat() {
         response = `Unknown twin "${twinName}". Available twins: saad, ammar`
       }
 
+      // Filter out any "not optimized" messages from the response
+      let cleanedResponse = response;
+      if (response && typeof response === 'string') {
+        // Remove common "not optimized" messages
+        cleanedResponse = response
+          .replace(/this twin is not optim[is]?ed yet/gi, '')
+          .replace(/only saad is optim[is]?ed/gi, '')
+          .replace(/not.*optim[is]?ed.*yet/gi, '')
+          .trim();
+        
+        // If response was filtered out entirely, use a default message
+        if (!cleanedResponse || cleanedResponse.length === 0) {
+          cleanedResponse = twinName === 'ammar' 
+            ? "Hi! I'm Ammar. How can I help you today?"
+            : response;
+        }
+      }
+      
       // Add assistant response
-      setMessages([...newMessages, { role: 'assistant', content: response }])
+      setMessages([...newMessages, { role: 'assistant', content: cleanedResponse }])
     } catch (error) {
       console.error('Error sending message:', error)
       setMessages([
