@@ -155,19 +155,25 @@ app.post('/api/chat', async (req, res) => {
     
     console.log('\n📨 Received request:');
     console.log('   Twin:', twinName);
+    console.log('   Twin type:', typeof twinName);
     console.log('   Message:', message);
     console.log('   History items:', history.length);
+    console.log('   Full request body:', JSON.stringify(req.body, null, 2));
     
     // Get the appropriate Gradio space for this twin
     let spaceName;
     if (twinName === 'saad') {
       spaceName = process.env.GRADIO_SPACE_SAAD || process.env.GRADIO_SPACE || 'Saadanjum0/ai-twin-caht';
+      console.log('   ✅ Routing to SAAD space:', spaceName);
     } else if (twinName === 'ammar') {
       spaceName = process.env.GRADIO_SPACE_AMMAR || 'Saadanjum0/Ai-twin-chat';
+      console.log('   ✅ Routing to AMMAR space:', spaceName);
     } else {
+      console.log('   ❌ Unknown twin:', twinName);
       return res.status(400).json({ error: `Unknown twin "${twinName}". Available twins: saad, ammar` });
     }
     
+    console.log('   🔗 Connecting to Gradio Space:', spaceName);
     const client = await getGradioClient(spaceName);
     
     // ✅ Pass history to Gradio
@@ -192,7 +198,12 @@ app.post('/api/chat', async (req, res) => {
  */
 app.post('/api/predict', async (req, res) => {
   try {
+    console.log('\n📨 /api/predict - Received request');
+    console.log('   Full request body:', JSON.stringify(req.body, null, 2));
     const { message, history = [], twinName = 'saad' } = req.body;
+    
+    console.log('   Extracted twinName:', twinName);
+    console.log('   TwinName type:', typeof twinName);
     
     if (!message || typeof message !== 'string') {
       return res.status(400).json({ error: 'Message is required and must be a string' });
@@ -202,12 +213,16 @@ app.post('/api/predict', async (req, res) => {
     let spaceName;
     if (twinName === 'saad') {
       spaceName = process.env.GRADIO_SPACE_SAAD || process.env.GRADIO_SPACE || 'Saadanjum0/ai-twin-caht';
+      console.log('   ✅ Routing to SAAD space:', spaceName);
     } else if (twinName === 'ammar') {
       spaceName = process.env.GRADIO_SPACE_AMMAR || 'Saadanjum0/Ai-twin-chat';
+      console.log('   ✅ Routing to AMMAR space:', spaceName);
     } else {
+      console.log('   ❌ Unknown twin:', twinName);
       return res.status(400).json({ error: `Unknown twin "${twinName}". Available twins: saad, ammar` });
     }
     
+    console.log('   🔗 Connecting to Gradio Space:', spaceName);
     const client = await getGradioClient(spaceName);
     
     // Pass history to Gradio

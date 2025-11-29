@@ -62,12 +62,15 @@ function Chat() {
       }
       
       console.log('📤 Sending to API with history:', history);
+      console.log('🔍 Twin Name from URL:', twinName);
       
       // Call the API - using /predict endpoint
       let response
       if (twinName === 'saad') {
+        console.log('✅ Calling Saad API');
         response = await predictWithSaad(userMessage, history, twinName)
       } else if (twinName === 'ammar') {
+        console.log('✅ Calling Ammar API');
         response = await predictWithAmmar(userMessage, history, twinName)
       } else {
         response = `Unknown twin "${twinName}". Available twins: saad, ammar`

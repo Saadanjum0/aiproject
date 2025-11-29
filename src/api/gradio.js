@@ -102,19 +102,27 @@ export async function chatWithSaad(message, history = [], twinName = 'saad') {
  */
 export async function predictWithAmmar(message, history = [], twinName = 'ammar') {
   try {
+    // Force twinName to 'ammar' to ensure correct routing
+    const actualTwinName = 'ammar';
+    console.log('🔍 predictWithAmmar called');
+    console.log('   Original twinName param:', twinName);
+    console.log('   Using twinName:', actualTwinName);
     const url = API_BASE_URL.startsWith('http') 
       ? `${API_BASE_URL}/api/predict` 
       : `${API_BASE_URL}/predict`;
+    const requestBody = { 
+      message,
+      history,
+      twinName: actualTwinName
+    };
+    console.log('📤 Sending request to:', url);
+    console.log('📦 Request body twinName:', requestBody.twinName);
     const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ 
-        message,
-        history,
-        twinName
-      }),
+      body: JSON.stringify(requestBody),
     });
 
     if (!response.ok) {
@@ -145,6 +153,10 @@ export async function predictWithAmmar(message, history = [], twinName = 'ammar'
  */
 export async function chatWithAmmar(message, history = [], twinName = 'ammar') {
   try {
+    // Force twinName to 'ammar' to ensure correct routing
+    const actualTwinName = 'ammar';
+    console.log('🔍 chatWithAmmar called');
+    console.log('   Using twinName:', actualTwinName);
     const url = API_BASE_URL.startsWith('http') 
       ? `${API_BASE_URL}/api/chat` 
       : `${API_BASE_URL}/chat`;
@@ -156,7 +168,7 @@ export async function chatWithAmmar(message, history = [], twinName = 'ammar') {
       body: JSON.stringify({ 
         message,
         history,
-        twinName
+        twinName: actualTwinName
       }),
     });
 
