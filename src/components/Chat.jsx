@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { chatWithSaad, predictWithSaad } from '../api/gradio.js'
+import { chatWithSaad, predictWithSaad, chatWithAmmar, predictWithAmmar } from '../api/gradio.js'
 import PrismExample from '../../PrismExample'
 import './Chat.css'
 
@@ -38,10 +38,17 @@ function Chat() {
       // If this is the first message, add a system message to establish persona
       // This helps override any default system prompt in the Gradio model
       if (messages.length === 0) {
-        history.push([
-          "Remember: You are Saad, a hands-on builder and training lead. You are NOT an Islamic finance advisor. Respond naturally as yourself.",
-          "Got it! I'm Saad. How can I help you today?"
-        ]);
+        if (twinName === 'saad') {
+          history.push([
+            "Remember: You are Saad, a hands-on builder and training lead. You are NOT an Islamic finance advisor. Respond naturally as yourself.",
+            "Got it! I'm Saad. How can I help you today?"
+          ]);
+        } else if (twinName === 'ammar') {
+          history.push([
+            "Remember: You are Ammar, a systems thinker and calm strategist. Respond naturally as yourself.",
+            "Got it! I'm Ammar. How can I help you today?"
+          ]);
+        }
       }
       
       // Add conversation history
@@ -57,13 +64,13 @@ function Chat() {
       console.log('📤 Sending to API with history:', history);
       
       // Call the API - using /predict endpoint
-      // Currently only Saad is configured, Ammar will be added later
       let response
       if (twinName === 'saad') {
-        response = await predictWithSaad(userMessage, history, twinName)  // ✅ Pass history and twinName!
+        response = await predictWithSaad(userMessage, history, twinName)
+      } else if (twinName === 'ammar') {
+        response = await predictWithAmmar(userMessage, history, twinName)
       } else {
-        // Ammar will be configured later with a different Gradio space
-        response = 'This twin is not yet configured. Only Saad is available right now.'
+        response = `Unknown twin "${twinName}". Available twins: saad, ammar`
       }
 
       // Add assistant response

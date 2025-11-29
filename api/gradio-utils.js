@@ -121,15 +121,14 @@ export function extractResponse(result) {
 
 /**
  * Get Gradio Space name for a twin
- * Currently only Saad is configured
  */
 export function getGradioSpaceForTwin(twinName) {
-  // Only Saad is configured for now
-  // Ammar will be added later with a different space
   if (twinName === 'saad') {
-    return process.env.GRADIO_SPACE_SAAD || 'Saadanjum0/ai-twin-caht';
+    return process.env.GRADIO_SPACE_SAAD || process.env.GRADIO_SPACE || 'Saadanjum0/ai-twin-caht';
   }
-  // Ammar will use GRADIO_SPACE_AMMAR when configured
-  throw new Error(`Twin "${twinName}" is not yet configured`);
+  if (twinName === 'ammar') {
+    return process.env.GRADIO_SPACE_AMMAR || 'Saadanjum0/Ai-twin-chat';
+  }
+  throw new Error(`Unknown twin "${twinName}". Available twins: saad, ammar`);
 }
 

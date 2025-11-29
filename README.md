@@ -30,11 +30,12 @@ Create a `.env` file in the root directory:
 ```env
 PORT=3001
 GRADIO_SPACE_SAAD=Saadanjum0/ai-twin-caht
+GRADIO_SPACE_AMMAR=Saadanjum0/Ai-twin-chat
 # For backward compatibility
 GRADIO_SPACE=Saadanjum0/ai-twin-caht
 ```
 
-**Note:** Currently only Saad is configured. Ammar will use a different Gradio space when added.
+**Note:** Both Saad and Ammar are now fully configured and working.
 
 ### 3. Run the Application
 
@@ -153,6 +154,7 @@ npm i -g vercel
    In Vercel dashboard, go to Settings → Environment Variables and add:
    ```
    GRADIO_SPACE_SAAD=Saadanjum0/ai-twin-caht
+   GRADIO_SPACE_AMMAR=Saadanjum0/Ai-twin-chat
    ```
    (Optional: `GRADIO_SPACE` for backward compatibility)
 
@@ -175,12 +177,5 @@ npm i -g vercel
 
 ### Current Status
 
-- ✅ **Saad**: Fully configured and working
-- ⏳ **Ammar**: Will be added later with a different Gradio space
-
-### Adding Ammar Later
-
-When ready to add Ammar:
-1. Set `GRADIO_SPACE_AMMAR` environment variable in Vercel
-2. Update `api/gradio-utils.js` to handle Ammar's space
-3. The Chat component will automatically work with both twins
+- ✅ **Saad**: Fully configured and working (Space: `Saadanjum0/ai-twin-caht`)
+- ✅ **Ammar**: Fully configured and working (Space: `Saadanjum0/Ai-twin-chat`)

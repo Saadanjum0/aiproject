@@ -6,6 +6,7 @@
 2. **Import to Vercel** at [vercel.com](https://vercel.com)
 3. **Add Environment Variables** in Vercel dashboard:
    - `GRADIO_SPACE_SAAD=Saadanjum0/ai-twin-caht`
+   - `GRADIO_SPACE_AMMAR=Saadanjum0/Ai-twin-chat`
 4. **Deploy!**
 
 ## Environment Variables
@@ -14,6 +15,7 @@ Add these in Vercel Dashboard → Settings → Environment Variables:
 
 ```
 GRADIO_SPACE_SAAD=Saadanjum0/ai-twin-caht
+GRADIO_SPACE_AMMAR=Saadanjum0/Ai-twin-chat
 ```
 
 ## Project Structure
@@ -44,8 +46,8 @@ GRADIO_SPACE_SAAD=Saadanjum0/ai-twin-caht
 
 ## Current Status
 
-- ✅ **Saad**: Fully configured and working
-- ⏳ **Ammar**: Will be added later
+- ✅ **Saad**: Fully configured and working (Space: `Saadanjum0/ai-twin-caht`)
+- ✅ **Ammar**: Fully configured and working (Space: `Saadanjum0/Ai-twin-chat`)
 
 ## Testing Locally
 
@@ -65,8 +67,8 @@ vercel dev
 
 ### API Returns 500 Error
 - Check Vercel function logs
-- Verify `GRADIO_SPACE_SAAD` environment variable is set
-- Check that Gradio Space is accessible
+- Verify `GRADIO_SPACE_SAAD` and `GRADIO_SPACE_AMMAR` environment variables are set
+- Check that Gradio Spaces are accessible
 
 ### CORS Issues
 - Serverless functions include CORS headers automatically

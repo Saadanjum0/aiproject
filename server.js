@@ -13,8 +13,8 @@ app.use(cors());
 app.use(express.json());
 
 // Gradio Space URLs (deployed on Hugging Face Spaces)
-// Currently only Saad is configured, Ammar will be added later
 const GRADIO_SPACE_SAAD = process.env.GRADIO_SPACE_SAAD || process.env.GRADIO_SPACE || 'Saadanjum0/ai-twin-caht';
+const GRADIO_SPACE_AMMAR = process.env.GRADIO_SPACE_AMMAR || 'Saadanjum0/Ai-twin-chat';
 
 // Cache for Gradio clients (per space)
 const gradioClients = {};
@@ -159,13 +159,13 @@ app.post('/api/chat', async (req, res) => {
     console.log('   History items:', history.length);
     
     // Get the appropriate Gradio space for this twin
-    // Currently only Saad is configured
-    const spaceName = twinName === 'saad' 
-      ? (process.env.GRADIO_SPACE_SAAD || process.env.GRADIO_SPACE || 'Saadanjum0/ai-twin-caht')
-      : null;
-    
-    if (!spaceName) {
-      return res.status(400).json({ error: `Twin "${twinName}" is not yet configured. Only Saad is available.` });
+    let spaceName;
+    if (twinName === 'saad') {
+      spaceName = process.env.GRADIO_SPACE_SAAD || process.env.GRADIO_SPACE || 'Saadanjum0/ai-twin-caht';
+    } else if (twinName === 'ammar') {
+      spaceName = process.env.GRADIO_SPACE_AMMAR || 'Saadanjum0/Ai-twin-chat';
+    } else {
+      return res.status(400).json({ error: `Unknown twin "${twinName}". Available twins: saad, ammar` });
     }
     
     const client = await getGradioClient(spaceName);
@@ -199,13 +199,13 @@ app.post('/api/predict', async (req, res) => {
     }
     
     // Get the appropriate Gradio space for this twin
-    // Currently only Saad is configured
-    const spaceName = twinName === 'saad' 
-      ? (process.env.GRADIO_SPACE_SAAD || process.env.GRADIO_SPACE || 'Saadanjum0/ai-twin-caht')
-      : null;
-    
-    if (!spaceName) {
-      return res.status(400).json({ error: `Twin "${twinName}" is not yet configured. Only Saad is available.` });
+    let spaceName;
+    if (twinName === 'saad') {
+      spaceName = process.env.GRADIO_SPACE_SAAD || process.env.GRADIO_SPACE || 'Saadanjum0/ai-twin-caht';
+    } else if (twinName === 'ammar') {
+      spaceName = process.env.GRADIO_SPACE_AMMAR || 'Saadanjum0/Ai-twin-chat';
+    } else {
+      return res.status(400).json({ error: `Unknown twin "${twinName}". Available twins: saad, ammar` });
     }
     
     const client = await getGradioClient(spaceName);
@@ -231,12 +231,15 @@ app.post('/api/predict', async (req, res) => {
 app.get('/api/health', async (req, res) => {
   try {
     const twinName = req.query.twin || 'saad';
-    const spaceName = twinName === 'saad' ? GRADIO_SPACE_SAAD : null;
-    
-    if (!spaceName) {
+    let spaceName;
+    if (twinName === 'saad') {
+      spaceName = GRADIO_SPACE_SAAD;
+    } else if (twinName === 'ammar') {
+      spaceName = GRADIO_SPACE_AMMAR;
+    } else {
       return res.status(400).json({ 
         status: 'unhealthy', 
-        error: `Twin "${twinName}" is not yet configured` 
+        error: `Unknown twin "${twinName}". Available twins: saad, ammar` 
       });
     }
     
@@ -259,13 +262,22 @@ app.get('/api/health', async (req, res) => {
 app.listen(PORT, async () => {
   console.log(`🚀 Express proxy server running on http://localhost:${PORT}`);
   console.log(`📡 Saad's Gradio Space: ${GRADIO_SPACE_SAAD}`);
+  console.log(`📡 Ammar's Gradio Space: ${GRADIO_SPACE_AMMAR}`);
   
-  // Pre-connect to Gradio Space on startup (optional, for faster first request)
+  // Pre-connect to Gradio Spaces on startup (optional, for faster first request)
   try {
     await getGradioClient(GRADIO_SPACE_SAAD);
-    console.log('✅ Ready to accept requests!');
+    console.log('✅ Connected to Saad's space');
   } catch (error) {
-    console.error('❌ Failed to pre-connect to Gradio Space:', error.message);
-    console.log('⚠️  Server will try to connect on first request');
+    console.error('❌ Failed to pre-connect to Saad's Gradio Space:', error.message);
   }
+  
+  try {
+    await getGradioClient(GRADIO_SPACE_AMMAR);
+    console.log('✅ Connected to Ammar's space');
+  } catch (error) {
+    console.error('❌ Failed to pre-connect to Ammar's Gradio Space:', error.message);
+  }
+  
+  console.log('✅ Ready to accept requests!');
 });

@@ -92,3 +92,89 @@ export async function chatWithSaad(message, history = [], twinName = 'saad') {
     throw error;
   }
 }
+
+/**
+ * Call the /predict endpoint via proxy for Ammar
+ * @param {string} message - The message to send
+ * @param {Array} history - The conversation history in Gradio format [[user, bot], ...]
+ * @param {string} twinName - The twin name ('saad' or 'ammar'), defaults to 'ammar'
+ * @returns {Promise<string>} - The response text
+ */
+export async function predictWithAmmar(message, history = [], twinName = 'ammar') {
+  try {
+    const url = API_BASE_URL.startsWith('http') 
+      ? `${API_BASE_URL}/api/predict` 
+      : `${API_BASE_URL}/predict`;
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ 
+        message,
+        history,
+        twinName
+      }),
+    });
+
+    if (!response.ok) {
+      let errorData;
+      try {
+        errorData = await response.json();
+      } catch (e) {
+        const text = await response.text();
+        throw new Error(`HTTP ${response.status}: ${text || 'Unknown error'}`);
+      }
+      throw new Error(errorData.error || errorData.message || `HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.response || data.message || 'No response received';
+  } catch (error) {
+    console.error('Error calling API:', error);
+    throw error;
+  }
+}
+
+/**
+ * Call the /chat endpoint via proxy for Ammar
+ * @param {string} message - The message to send
+ * @param {Array} history - The conversation history in Gradio format [[user, bot], ...]
+ * @param {string} twinName - The twin name ('saad' or 'ammar'), defaults to 'ammar'
+ * @returns {Promise<string>} - The response text
+ */
+export async function chatWithAmmar(message, history = [], twinName = 'ammar') {
+  try {
+    const url = API_BASE_URL.startsWith('http') 
+      ? `${API_BASE_URL}/api/chat` 
+      : `${API_BASE_URL}/chat`;
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ 
+        message,
+        history,
+        twinName
+      }),
+    });
+
+    if (!response.ok) {
+      let errorData;
+      try {
+        errorData = await response.json();
+      } catch (e) {
+        const text = await response.text();
+        throw new Error(`HTTP ${response.status}: ${text || 'Unknown error'}`);
+      }
+      throw new Error(errorData.error || errorData.message || `HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.response || data.message || 'No response received';
+  } catch (error) {
+    console.error('Error calling API:', error);
+    throw error;
+  }
+}

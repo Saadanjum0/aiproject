@@ -230,11 +230,12 @@ The application maintains conversation context by:
    ```
 
 2. **Configure Environment Variables**
-   Create a `.env` file in the root directory:
-   ```
-   PORT=3001
-   GRADIO_SPACE_SAAD=Saadanjum0/ai-twin-caht
-   ```
+Create a `.env` file in the root directory:
+```
+PORT=3001
+GRADIO_SPACE_SAAD=Saadanjum0/ai-twin-caht
+GRADIO_SPACE_AMMAR=Saadanjum0/Ai-twin-chat
+```
 
 3. **Start the Application**
 
@@ -287,11 +288,15 @@ The application maintains conversation context by:
    - WebGL background effects
    - Clean, professional interface
 
-### ⏳ Planned Features
+### ✅ Completed Features
 
-- Full Ammar AI twin configuration (currently only Saad is active)
+- Full Ammar AI twin configuration (now active alongside Saad)
+
+### ⏳ Future Enhancements
+
 - Additional conversation features
 - Message export/sharing capabilities
+- Conversation history persistence
 
 ---
 
@@ -388,8 +393,8 @@ This project demonstrates:
 
 ## ❓ Frequently Asked Questions
 
-**Q: Why is only Saad's twin working?**
-A: Ammar's AI model space on Hugging Face is not yet configured. The infrastructure is ready, but the Gradio Space URL needs to be set up.
+**Q: Are both twins working?**
+A: Yes! Both Saad and Ammar's AI twins are fully configured and working. Saad's space is `Saadanjum0/ai-twin-caht` and Ammar's space is `Saadanjum0/Ai-twin-chat`.
 
 **Q: Can I add more AI twins?**
 A: Yes! The architecture supports multiple twins. Add a new Gradio Space URL in environment variables and update the twin selection logic.
