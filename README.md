@@ -2,6 +2,8 @@
 
 A React frontend with Express proxy server connecting to Gradio AI models on Hugging Face Spaces.
 
+> 📖 **For comprehensive project documentation** (ideal for teachers, educators, and detailed understanding), see **[PROJECT_DOCUMENTATION.md](./PROJECT_DOCUMENTATION.md)** - This document explains what the project is, how it works, architecture, educational value, and much more!
+
 ## Architecture
 
 ```
