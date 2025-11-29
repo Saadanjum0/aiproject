@@ -39,7 +39,6 @@ export default async function handler(req, res) {
     }
 
     // Get the appropriate Gradio space for this twin
-    // Currently only Saad is configured
     const spaceName = getGradioSpaceForTwin(twinName);
     
     console.log('\n📨 Received request:');
