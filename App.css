@@ -34,7 +34,7 @@
   gap: 1.5rem;
   max-width: min(1100px, 100%);
   margin: 0 auto;
-  padding: clamp(2rem, 6vw, 5rem);
+  padding: clamp(1.5rem, 6vw, 5rem);
 }
 
 .hero__eyebrow {
@@ -133,11 +133,20 @@
 
 @media (max-width: 640px) {
   .hero {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    padding: 1.5rem 1.25rem 3rem;
+    gap: 1.25rem;
   }
 
   .hero__eyebrow {
     letter-spacing: 0.25em;
+  }
+
+  .twin-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .twin-card {
+    padding: 1.25rem;
   }
 }
