@@ -7,7 +7,7 @@
   background: #010109;
   color: #f5f5ff;
   font-family: 'Space Grotesk', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .chat-container::after {
@@ -44,11 +44,17 @@
   text-decoration: none;
   font-size: 0.95rem;
   font-weight: 600;
-  transition: color 0.18s ease;
+  padding: 0.55rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(147, 197, 253, 0.12);
+  border: 1px solid rgba(147, 197, 253, 0.3);
+  transition: color 0.18s ease, background 0.18s ease, border-color 0.18s ease;
 }
 
 .chat-back-link:hover {
   color: #7ab3ff;
+  background: rgba(147, 197, 253, 0.18);
+  border-color: rgba(147, 197, 253, 0.45);
 }
 
 .chat-header-info h1 {
@@ -241,14 +247,21 @@
 @media (max-width: 768px) {
   .chat-header {
     padding: 0.9rem 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
   }
 
   .chat-header-info h1 {
     font-size: 1.35rem;
+    text-align: center;
   }
 
   .chat-header-info p {
     font-size: 0.9rem;
+    text-align: center;
   }
 
   .chat-messages {

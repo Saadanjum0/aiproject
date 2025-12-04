@@ -16,12 +16,12 @@
 
 @media (max-width: 640px) {
   .prism-container {
-    opacity: 0.75;
+    opacity: 0.5;
   }
 }
 
 @media (max-width: 480px) {
   .prism-container {
-    opacity: 0.6;
+    opacity: 0.4;
   }
 }

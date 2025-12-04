@@ -136,6 +136,8 @@
   .hero {
     padding: 1.5rem 1.25rem 3rem;
     gap: 1.25rem;
+    text-align: center;
+    align-items: center;
   }
 
   .hero__eyebrow {
@@ -156,11 +158,13 @@
   .hero {
     padding: 1.1rem 1rem 2.5rem;
     gap: 1rem;
+    align-items: center;
   }
 
   .hero__title {
     font-size: clamp(2.1rem, 7vw, 2.6rem);
     line-height: 1.1;
+    text-align: center;
   }
 
   .hero__subtitle {
