@@ -31,19 +31,20 @@
 .chat-header {
   position: relative;
   z-index: 2;
-  padding: 1.5rem 2rem;
+  padding: 1.25rem 1.75rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(6, 6, 18, 0.65);
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(14px);
 }
 
 .chat-back-link {
   display: inline-block;
-  margin-bottom: 1rem;
+  margin-bottom: 0.65rem;
   color: #9cc5ff;
   text-decoration: none;
-  font-size: 0.9rem;
-  transition: color 0.2s ease;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: color 0.18s ease;
 }
 
 .chat-back-link:hover {
@@ -157,11 +158,11 @@
   z-index: 2;
   display: flex;
   gap: 1rem;
-  padding: 1.5rem 2rem;
+  padding: 1.35rem 1.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(6, 6, 18, 0.65);
-  backdrop-filter: blur(18px);
-  padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));
+  backdrop-filter: blur(14px);
+  padding-bottom: calc(1.25rem + env(safe-area-inset-bottom));
 }
 
 .chat-input {
@@ -201,7 +202,7 @@
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.12s ease, background 0.18s ease, border-color 0.18s ease;
 }
 
 .chat-send-button:hover:not(:disabled) {
@@ -239,11 +240,11 @@
 
 @media (max-width: 768px) {
   .chat-header {
-    padding: 1rem 1.25rem;
+    padding: 0.9rem 1rem;
   }
 
   .chat-header-info h1 {
-    font-size: 1.4rem;
+    font-size: 1.35rem;
   }
 
   .chat-header-info p {
@@ -272,7 +273,7 @@
   .chat-input-form {
     flex-direction: column;
     gap: 0.75rem;
-    padding: 1.25rem 1.25rem calc(1.25rem + env(safe-area-inset-bottom));
+    padding: 1rem 1rem calc(1.1rem + env(safe-area-inset-bottom));
   }
 
   .chat-input {
@@ -284,8 +285,8 @@
   .chat-send-button {
     width: 100%;
     text-align: center;
-    padding: 0.9rem 1rem;
-    font-size: 1rem;
+    padding: 0.85rem 1rem;
+    font-size: 0.98rem;
   }
 }
 
