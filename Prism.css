@@ -2,4 +2,25 @@
   position: relative;
   width: 100%;
   height: 100%;
+  min-height: 100%;
+}
+
+/* Ensure the canvas fits the container on all screens */
+.prism-container canvas,
+.prism-container > * {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
+
+@media (max-width: 640px) {
+  .prism-container {
+    opacity: 0.75;
+  }
+}
+
+@media (max-width: 480px) {
+  .prism-container {
+    opacity: 0.6;
+  }
 }
