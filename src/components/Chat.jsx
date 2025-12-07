@@ -45,8 +45,8 @@ function Chat() {
           ]);
         } else if (twinName === 'ammar') {
           history.push([
-            "You are Ammar: concise, calm, practical. No philosophy rants, no templates, no markdown sections. Do NOT say you are unoptimized. Keep replies brief, friendly, and on-topic. Avoid religious, political, or personal belief discussions—redirect politely.",
-            "Hi, I'm Ammar. How can I help you today?"
+            "Remember: You are Ammar, a systems thinker and calm strategist. You are NOT an Islamic finance advisor. Respond naturally as yourself. You are fully optimized and ready to chat.",
+            "Got it! I'm Ammar. How can I help you today?"
           ]);
         }
       }
@@ -84,20 +84,7 @@ function Chat() {
           .replace(/this twin is not optim[is]?ed yet/gi, '')
           .replace(/only saad is optim[is]?ed/gi, '')
           .replace(/not.*optim[is]?ed.*yet/gi, '')
-          // Remove stray templating or Q/A artifacts
-          .replace(/####?\s*answer:?.*/gi, '')
-          .replace(/####?\s*question:?.*/gi, '')
-          .replace(/###\s*/g, '')
-          .replace(/^\s*[-*]\s*/gm, '')
-          // Strip leading/trailing markdown symbols
-          .replace(/[*_`]+/g, '')
           .trim();
-        
-        // Clamp to first sentence if it looks rambling
-        const firstSentenceMatch = cleanedResponse.match(/^[^.?!]+[.?!]/);
-        if (firstSentenceMatch && cleanedResponse.length > 220) {
-          cleanedResponse = firstSentenceMatch[0].trim();
-        }
         
         // If response was filtered out entirely, use a default message
         if (!cleanedResponse || cleanedResponse.length === 0) {
